@@ -1,4 +1,5 @@
 import os
+import configparser
 from flask import Flask
 from flask.json import JSONEncoder
 from flask_cors import CORS
@@ -14,15 +15,18 @@ class MongoJsonEncoder(JSONEncoder):
             return str(obj)
         return json_util.default(obj, json_util.CANONICAL_JSON_OPTIONS)
 
-def create_app(test_config=None):
-    app = Flask(__name__)
-    CORS(app)
-    app.json_encoder = MongoJsonEncoder
-    app.register_blueprint(housing_data)
+config = configparser.ConfigParser()
+config.read(os.path.abspath(os.path.join(".ini")))
 
-    @app.route('/', defaults={'path': ''})
-    @app.route('/<path:path>')
-    def serve(path):
-        return 'Hello, World!'
+app = Flask(__name__)
+CORS(app)
 
-    return app
+app.config['MONGO_URI'] = config['PROD']['DB_URI']
+
+app.json_encoder = MongoJsonEncoder
+app.register_blueprint(housing_data)
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+    return 'Hello, World!'
