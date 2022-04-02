@@ -12,7 +12,7 @@ def get_db():
     if db is None:
 
         db = g._database = PyMongo(current_app).db
-       
+
     return db
 
 db = LocalProxy(get_db)
@@ -25,6 +25,6 @@ def get_housing_data():
 
 def get_regions():
 
-    regions = db.HousingData.find({}, {"region_name": 1})
+    regions = db.HousingData.find({}, {"region_name": 1}).limit(10)
 
     return list(regions)
