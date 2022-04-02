@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template
+from flask import Flask
 from flask.json import JSONEncoder
 from flask_cors import CORS
 from bson import json_util, ObjectId
@@ -29,6 +29,6 @@ def create_app(test_config=None):
     @app.route('/', defaults={'path': ''})
     @app.route('/<path:path>')
     def serve(path):
-        return render_template('index.html')
+        return 'Hello, World!'
 
     return app
