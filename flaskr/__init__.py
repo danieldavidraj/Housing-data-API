@@ -14,16 +14,13 @@ class MongoJsonEncoder(JSONEncoder):
             return str(obj)
         return json_util.default(obj, json_util.CANONICAL_JSON_OPTIONS)
 
-def create_app(test_config=None):
+app = Flask(__name__)
 
-    app = Flask(__name__)
-    CORS(app)
-    app.json_encoder = MongoJsonEncoder
-    app.register_blueprint(housing_data)
+CORS(app)
+app.json_encoder = MongoJsonEncoder
+app.register_blueprint(housing_data)
 
-    @app.route('/', defaults={'path': ''})
-    @app.route('/<path:path>')
-    def serve(path):
-        return 'Hello, World!'
-
-    return app
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+    return 'Hello, World!'
