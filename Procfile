@@ -1,1 +1,1 @@
-web: gunicorn run_wsgi: app
+web: gunicorn run: app
