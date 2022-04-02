@@ -15,13 +15,8 @@ class MongoJsonEncoder(JSONEncoder):
         return json_util.default(obj, json_util.CANONICAL_JSON_OPTIONS)
 
 def create_app(test_config=None):
-    APP_DIR = os.path.abspath(os.path.dirname(__file__))
-    STATIC_FOLDER = os.path.join(APP_DIR, 'build/static')
-    TEMPLATE_FOLDER = os.path.join(APP_DIR, 'build')
 
-    app = Flask(__name__, static_folder=STATIC_FOLDER,
-                template_folder=TEMPLATE_FOLDER,
-                )
+    app = Flask(__name__)
     CORS(app)
     app.json_encoder = MongoJsonEncoder
     app.register_blueprint(housing_data)
