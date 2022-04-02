@@ -19,9 +19,9 @@ db = LocalProxy(get_db)
 
 def get_housing_data():
 
-    movies = db.HousingData.find({}).limit(1)
+    housing_data = db.HousingData.find({}).limit(1)
 
-    return list(movies)
+    return list(housing_data)
 
 def get_regions():
 

@@ -9,10 +9,10 @@ CORS(housing_data)
 @housing_data.route('/', methods=['GET'])
 def api_housing_data():
 
-    movies = get_housing_data()
+    housing_data = get_housing_data()
 
     response = {
-        "movies": movies
+        "housing_data": housing_data
     }
 
     return jsonify(response)
