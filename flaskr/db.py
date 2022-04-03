@@ -19,7 +19,7 @@ db = LocalProxy(get_db)
 
 def get_housing_data():
 
-    housing_data = db.HousingData.find({}).sort({"region_name":1}).limit(10)
+    housing_data = db.HousingData.find({}).limit(10)
 
     return list(housing_data)
 
