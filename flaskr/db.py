@@ -25,6 +25,6 @@ def get_housing_data():
 
 def get_regions():
 
-    regions = db.HousingData.distinct({}, {"region_name": 1})
+    regions = db.HousingData.distinct({"region_id"}, {"region_name": 1,"_id":0})
 
     return list(regions)
