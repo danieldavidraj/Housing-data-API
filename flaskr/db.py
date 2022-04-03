@@ -19,12 +19,12 @@ db = LocalProxy(get_db)
 
 def get_housing_data():
 
-    housing_data = db.HousingData.find({})
+    housing_data = db.HousingData.distinct({},{"region_id":1})
 
     return list(housing_data)
 
 def get_regions():
 
-    regions = db.HousingData.find({}, {"region_name": 1}).limit(10)
+    regions = db.HousingData.distinct({}, {"region_name": 1})
 
     return list(regions)
