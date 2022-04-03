@@ -25,6 +25,6 @@ def get_housing_data():
 
 def get_regions():
 
-    regions = db.HousingData.find({}, {"region_name": 1}).limit(10)
+    regions = db.HousingData.find({}, {"region_name": 1})
 
     return list(regions)
