@@ -1,5 +1,7 @@
 # Housing Data API
 
+#### Link: [housing-data-api](https://housing-data-api.herokuapp.com/)
+
 ### Quick install guide
 
 ```
@@ -20,5 +22,5 @@ pip install -r requirements.txt
 
 ### Endpoints
 
-* GET ```https://zerdown.herokuapp.com/housing_data```
-* GET ```https://zerdown.herokuapp.com/housing_data/regions```
+* ```GET``` /housing_data
+* ```GET``` /housing_data/regions
