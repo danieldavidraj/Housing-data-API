@@ -5,7 +5,8 @@ from flask.json import JSONEncoder
 from flask_cors import CORS
 from bson import json_util, ObjectId
 from datetime import datetime
-from flaskr.api.housing_data import housing_data
+from flask_restx import Api
+from flaskr.api.housing_data import api as ns1
 
 class MongoJsonEncoder(JSONEncoder):
     def default(self, obj):
@@ -24,9 +25,13 @@ CORS(app)
 app.config['MONGO_URI'] = config['PROD']['DB_URI']
 
 app.json_encoder = MongoJsonEncoder
-app.register_blueprint(housing_data)
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def serve(path):
-    return 'Hello, World!'
+api = Api(
+    app, 
+    version='1.0', 
+    title='Housing Data',
+    description='A simple Housing Data API'
+)
+
+api.add_namespace(ns1)
+
